@@ -26,12 +26,14 @@ public class ChessPieceStrategy {
     }
 
     public boolean diagonalChess(int a, int b) {
+        MathHelpers mathHelpers = new MathHelpers();
         int difference = pieceNumberDifference(a, b);
-
-        if ((difference % 9 == 0 && a % 9 == 0 && b % 9 == 0) || difference % 9 == 0 && a % 9 != 0 && b % 9 != 0 && checkForFalseChecks(a, b) && (a != b)) {
+        HashMap<Integer, Integer> bishopMaps = mathHelpers.bishopsMap(PlayerPieces.chessBoardValues);
+        if (((difference % 9 == 0 && a % 9 == 0 && b % 9 == 0) || (difference % 9 == 0 && a % 9 != 0 && b % 9 != 0) )
+                && (bishopMaps.get(a).equals(bishopMaps.get(b))) && (a != b)) {
             return true;
-        } else if ((difference % 7 == 0 && a % 7 == 0 && b % 7 == 0) && (!(a == 56 && b == 14) && !(a == 14 && b == 56)) ||
-                (difference % 7 == 0 && a % 7 != 0 && b % 7 != 0) && a != b) {
+        } else if (((difference % 7 == 0 && a % 7 == 0 && b % 7 == 0)  || (difference % 7 == 0 && a % 7 != 0 && b % 7 != 0))
+                && (a != b) && (bishopMaps.get(a).equals(bishopMaps.get(b)))) {
             return true;
         } else if ((a == 56 && b == 63) || (a == 63 && b == 56)) {
             return true;
