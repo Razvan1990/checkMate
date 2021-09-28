@@ -33,31 +33,34 @@ public class MathHelpers {
     public boolean checkIfIsAllowedBishops(int a, int b) {
         ChessPieceStrategy chessPieceStrategy = new ChessPieceStrategy();
         int differenceBishops = chessPieceStrategy.pieceNumberDifference(a, b);
-        if ((a == 1 || b == 1) && (differenceBishops % 9 == 0)) {
-            return true;
-        }
-        if ((a == 8 || b == 8) && (differenceBishops % 7 == 0)) {
-            return true;
-        }
-        if ((a == 57 || b == 57) && (differenceBishops % 7 == 0)) {
-            return true;
-        }
-        if ((a == 64 || b == 64) && (differenceBishops % 9 == 0)) {
-            return true;
-        }
+        HashMap<Integer,Integer> myMap = bishopsMap(PlayerPieces.chessBoardValues);
+//         if ((a == 1 || b == 1) && (differenceBishops % 9 == 0)) {
+//             return true;
+//         }
+//         if ((a == 8 || b == 8) && (differenceBishops % 7 == 0)) {
+//             return true;
+//         }
+//         if ((a == 57 || b == 57) && (differenceBishops % 7 == 0)) {
+//             return true;
+//         }
+//         if ((a == 64 || b == 64) && (differenceBishops % 9 == 0)) {
+//             return true;
+//         }
 
-        if (differenceBishops % 16 == 0) {
-            return true;
-        } else if (differenceBishops % 8 == 0) {
-            return false;
-        } else if (differenceBishops == 2 || differenceBishops == 4 || differenceBishops == 6) {
-            return true;
-        } else if (differenceBishops == 1 || differenceBishops == 3 || differenceBishops == 5) {
-            return false;
-        } else if (differenceBishops % 9 == 0) {
-            return true;
-        }else if((((a %2 ==0 && b %2!=0) ||(a%2!=0 && b %2 ==0)) && differenceBishops % 7==0) &&
-                    (((a %2 ==0 && b %2==0) ||(a %2 !=0 && b %2!=0)  && differenceBishops %14 ==0))){
+//         if (differenceBishops % 16 == 0) {
+//             return true;
+//         } else if (differenceBishops % 8 == 0) {
+//             return false;
+//         } else if (differenceBishops == 2 || differenceBishops == 4 || differenceBishops == 6) {
+//             return true;
+//         } else if (differenceBishops == 1 || differenceBishops == 3 || differenceBishops == 5) {
+//             return false;
+//         } else if (differenceBishops % 9 == 0) {
+//             return true;
+//         }else if((((a %2 ==0 && b %2!=0) ||(a%2!=0 && b %2 ==0)) && differenceBishops % 7==0) &&
+//                     (((a %2 ==0 && b %2==0) ||(a %2 !=0 && b %2!=0)  && differenceBishops %14 ==0))){
+         if((myMap.get(a)==PlayerPieces.colors[0] && myMap.get(b)==PlayerPieces.colors[0]) ||
+                (myMap.get(a)==PlayerPieces.colors[1] && myMap.get(b)==PlayerPieces.colors[1])){
             return true;
             }
         else{
@@ -91,4 +94,27 @@ public class MathHelpers {
         }
 
     }
+ public HashMap<Integer, Integer> bishopsMap(int [][]chessTableNumbers){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < chessTableNumbers.length; i++) {
+            for (int j = 0; j < chessTableNumbers.length; j++) {
+                if (i % 2 == 0) {
+                    if (j % 2 == 0) {
+                        map.put(chessTableNumbers[i][j], 1);
+                    } else {
+                        map.put(chessTableNumbers[i][j], 0);
+                    }
+                } else {
+                    if (j % 2 == 0) {
+                        map.put(chessTableNumbers[i][j], 0);
+                    } else {
+                        map.put(chessTableNumbers[i][j], 1);
+                    }
+                }
+
+            }
+        }
+        return map;
+    }
+
 }
