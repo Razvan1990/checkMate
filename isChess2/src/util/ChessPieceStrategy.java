@@ -33,7 +33,7 @@ public class ChessPieceStrategy {
         } else if ((difference % 7 == 0 && a % 7 == 0 && b % 7 == 0) && (!(a == 56 && b == 14) && !(a == 14 && b == 56)) ||
                 (difference % 7 == 0 && a % 7 != 0 && b % 7 != 0) && a != b) {
             return true;
-        } else if ((a == 56 && b == 63) || (a == 63 && b == 54)) {
+        } else if ((a == 56 && b == 63) || (a == 63 && b == 56)) {
             return true;
         } else {
             return false;
